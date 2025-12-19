@@ -1,5 +1,7 @@
 package com.omrbranch.stepdefinition;
 
+import java.awt.AWTException;
+
 import com.omrbranch.manager.PageObjectManager;
 
 import io.cucumber.java.en.*;
@@ -24,12 +26,18 @@ public class TC001_LoginStep {
 	}
 
 	@When("User enters {string} and {string} with enter key")
-	public void userEntersAndWithEnterKey(String userName, String password) {
+	public void userEntersAndWithEnterKey(String userName, String password) throws AWTException {
+		pom.getLoginPage().RobotClassLogin(userName, password);
+		String loginSuccessMsg = pom.getExploreHotelPage().LoginSuccess();
+		Assert.assertEquals("Verify Login Message", "Welcome Prakash", loginSuccessMsg);
 	}
 
 	@Then("User should verify error message after login {string}")
 	public void userShouldVerifyErrorMessageAfterLogin(String expectedErrorMessage) {
+				String loginErrorMsg = pom.getLoginPage().LoginErrorMsg();
+		Assert.assertEquals("Verify Login Error Message",
+				"Invalid Login details or Your Password might have expired. Click here to reset your password",
+				loginErrorMsg);
 	}
 
 }
-

@@ -1,5 +1,6 @@
 package com.omrbranch.pages;
 
+import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -50,10 +51,16 @@ public class LoginPage extends BaseClass{
 		
 	}
 	
-	public void LoginErrorMsg() {
-		getElementText(errLoginMsg);
+	public String LoginErrorMsg() {
+		String errorLoginMsg = getElementText(errLoginMsg);
+		return errorLoginMsg;
 	}
 	
+	public void RobotClassLogin(String userName, String password) throws AWTException {
+		elementSendKeys(txtUserName, userName);
+		elementSendKeys(txtPassword,password);
+		enterKey();
+	}
 	
 	
 }
