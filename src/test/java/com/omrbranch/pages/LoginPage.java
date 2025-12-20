@@ -9,12 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.omrbranch.utility.BaseClass;
 
-public class LoginPage extends BaseClass{
-	
+public class LoginPage extends BaseClass {
+
 	public LoginPage() {
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(id = "email")
 	private WebElement txtUserName;
 
@@ -23,10 +23,9 @@ public class LoginPage extends BaseClass{
 
 	@FindBy(xpath = "//button[@value='login']")
 	private WebElement BtnLogin;
-	
-	@FindBy(id="errorMessage")
+
+	@FindBy(id = "errorMessage")
 	private WebElement errLoginMsg;
-	
 
 	public WebElement getTxtUserName() {
 		return txtUserName;
@@ -44,23 +43,21 @@ public class LoginPage extends BaseClass{
 		return errLoginMsg;
 	}
 
-	public void Login(String userName, String password){
+	public void Login(String userName, String password) {
 		elementSendKeys(txtUserName, userName);
-		elementSendKeys(txtPassword,password);
+		elementSendKeys(txtPassword, password);
 		elementClick(BtnLogin);
-		
+
 	}
-	
+
 	public String LoginErrorMsg() {
 		String errorLoginMsg = getElementText(errLoginMsg);
 		return errorLoginMsg;
 	}
-	
+
 	public void RobotClassLogin(String userName, String password) throws AWTException {
 		elementSendKeys(txtUserName, userName);
-		elementSendKeys(txtPassword,password);
-		enterKey();
+		elementSendKeysEnter(txtPassword, password);
 	}
-	
-	
+
 }
